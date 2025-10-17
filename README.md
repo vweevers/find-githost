@@ -8,44 +8,6 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Common Changelog](https://common-changelog.org/badge.svg)](https://common-changelog.org)
 
-## Table of Contents
-
-<details><summary>Click to expand</summary>
-
-- [Usage](#usage)
-- [API](#api)
-  - [Factories](#factories)
-    - [`githost = Githost.fromUrl(url[, options])`](#githost--githostfromurlurl-options)
-    - [`githost = Githost.fromDir(cwd[, options])`](#githost--githostfromdircwd-options)
-    - [`githost = Githost.fromPkg(cwd[, options])`](#githost--githostfrompkgcwd-options)
-    - [`githost = Githost.fromPkg(pkg[, options])`](#githost--githostfrompkgpkg-options)
-    - [`githost = Githost.fromGit(cwd[, options])`](#githost--githostfromgitcwd-options)
-  - [Properties](#properties)
-    - [`githost.type`](#githosttype)
-    - [`githost.owner`](#githostowner)
-    - [`githost.name`](#githostname)
-    - [`githost.committish`](#githostcommittish)
-    - [`githost.format`](#githostformat)
-    - [`githost.raw`](#githostraw)
-    - [`githost.hostname`](#githosthostname)
-  - [Methods](#methods)
-    - [`githost.shortcut([options])`](#githostshortcutoptions)
-    - [`githost.slug([options])`](#githostslugoptions)
-    - [`githost.https([options])`](#githosthttpsoptions)
-    - [`githost.ssh([options])`](#githostsshoptions)
-    - [`githost.sshurl([options])`](#githostsshurloptions)
-    - [`githost.git([options])`](#githostgitoptions)
-    - [`githost.homepage()`](#githosthomepage)
-    - [`githost.bugs()`](#githostbugs)
-    - [`githost.browse([path][, fragment][, options])`](#githostbrowsepath-fragment-options)
-    - [`githost.file(path[, options])`](#githostfilepath-options)
-    - [`githost.tarball([options])`](#githosttarballoptions)
-    - [`githost.toString([options])`](#githosttostringoptions)
-- [Install](#install)
-- [License](#license)
-
-</details>
-
 ## Usage
 
 Get info from `package.json` or git remote origin, whichever is found first:
