@@ -111,8 +111,9 @@ exports.fromGit = function (cwd, options) {
 }
 
 function getGitdir (cwd, roam) {
-  // TODO: fix this case in find-gitdir
-  return path.basename(cwd) === '.git' ? cwd : gitdir.sync(cwd, roam)
+  // In the case of a linked worktree we want $GIT_COMMON_DIR
+  // as that contains the `config` file and thus remotes
+  return gitdir.sync(cwd, { roam, common: true })
 }
 
 function getRemoteOrigin (gitdir) {
