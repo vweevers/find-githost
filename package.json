@@ -8,6 +8,7 @@
     "test": "standard && hallmark && nyc node test.js"
   },
   "files": [
+    "CHANGELOG.md",
     "index.js"
   ],
   "dependencies": {
