@@ -92,6 +92,47 @@ test('parse', function (t) {
   t.end()
 })
 
+test('parse GitLab subgroup', function (t) {
+  const fns = [
+    (url) => Githost.fromUrl(url),
+    (url) => Githost.fromPkg({ repository: url }),
+    (url) => Githost.fromPkg({ repository: { type: 'git', url } })
+  ]
+
+  for (const fn of fns) {
+    const url = 'git@gitlab.com:group/subgroup/repo.git'
+    const githost = fn(url)
+
+    t.is(githost.type, 'gitlab', 'type')
+    t.is(githost.owner, 'group/subgroup', 'owner')
+    t.is(githost.name, 'repo', 'name')
+    t.is(githost.committish, null, 'committish')
+    t.is(githost.raw, url, 'raw')
+    t.is(githost.format, 'ssh')
+    t.is(githost.hostname, 'gitlab.com')
+
+    t.is(githost.toString(), url, 'toString()')
+    t.is(githost.toString({ format: 'git' }), 'git://gitlab.com/group/subgroup/repo.git', 'toString()')
+    t.is(githost.toString({ format: 'slug', committish: false }), 'group/subgroup/repo')
+    t.is(githost.homepage(), 'https://gitlab.com/group/subgroup/repo', 'homepage')
+    t.is(githost.bugs(), 'https://gitlab.com/group/subgroup/repo/issues', 'bugs')
+    t.is(githost.browse(), 'https://gitlab.com/group/subgroup/repo/tree/main', 'browse')
+    t.is(githost.browse({ committish: 'main' }), 'https://gitlab.com/group/subgroup/repo/tree/main', 'browse')
+    t.is(githost.browse('README.md', { committish: 'main' }), 'https://gitlab.com/group/subgroup/repo/tree/main/README.md', 'browse')
+    t.is(githost.browse('README.md', '#usage', { committish: 'v1.0.0' }), 'https://gitlab.com/group/subgroup/repo/tree/v1.0.0/README.md#usage', 'browse')
+    t.is(githost.tarball({ committish: 'v1.0.0' }), 'https://gitlab.com/group/subgroup/repo/repository/archive.tar.gz?ref=v1.0.0', 'tarball')
+    t.is(githost.file('lib/index.js', { committish: 'main' }), 'https://gitlab.com/group/subgroup/repo/raw/main/lib/index.js', 'file')
+
+    t.is(githost.shortcut(), 'gitlab:group/subgroup/repo', 'shortcut')
+    t.is(githost.shortcut({ committish: false }), 'gitlab:group/subgroup/repo', 'shortcut')
+
+    t.is(githost.slug(), 'group/subgroup/repo', 'slug')
+    t.is(githost.slug({ committish: false }), 'group/subgroup/repo', 'slug')
+  }
+
+  t.end()
+})
+
 test('ignore parse failure', function (t) {
   t.is(Githost.fromUrl('invalid', { optional: true }), null)
   t.end()
