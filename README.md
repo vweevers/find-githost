@@ -6,6 +6,7 @@
 [![node](https://img.shields.io/node/v/find-githost.svg)](https://www.npmjs.org/package/find-githost)
 ![Test](https://github.com/vweevers/find-githost/workflows/Test/badge.svg?branch=main)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Common Changelog](https://common-changelog.org/badge.svg)](https://common-changelog.org)
 
 ## Table of Contents
 
